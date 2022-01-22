@@ -94,7 +94,8 @@ function registrarCant() {
 let datosM=[];
 function añadirProductos(product) {
     // let {mercaderia}=facturas;
-    addProducto.addEventListener('click', function () {
+    addProducto.addEventListener('click', function (stop) {
+        stop.preventDefault();
         inputNombreP.value= '';
         inputPrecioP.value= '';
         // console.log(datosM);
@@ -116,8 +117,8 @@ function añadirProductos(product) {
         })
         // crearResumenProductos(datosM);
 
-    })
-    console.log('hola');
+        console.log('hola');
+    },{once : true});
 }
 
 //AñadirCliente
@@ -134,6 +135,7 @@ function generarValoresProducto(productos) {
         const codigoP = e.target.value;
         const resultado = productos.filter(producto=>producto.codigo === codigoP);  
         addDatosP(resultado);
+        
         stuff=[...stuff,...resultado];
         
         añadirProductos(stuff);
