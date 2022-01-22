@@ -1,0 +1,37 @@
+@use 'variables' as v;
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(45deg, rgba(243,226,199,1) 2%,rgba(243,226,199,1) 4%,rgba(154,183,188,1) 23%,rgba(193,158,103,1) 39%,rgba(149,175,144,1) 74%,rgba(243,226,199,1) 92%,rgba(233,212,179,1) 100%);
+    color: black;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body {
+    font-family: v.$fuente_principal;
+    font-size: 1.6rem;
+}
+.contenedor {
+    h1{
+        color: white;
+    }
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}

@@ -1,0 +1,47 @@
+@use '../base/mixins' as m;
+.datoC{
+    p{
+        color: white;
+    }
+}
+.dato{
+    color: white;
+    label{
+        font-size: 1.9rem;
+        font-weight: 600;
+        margin-top: 1.2rem;
+    }
+    textarea{
+        opacity: 0.9;
+        border-radius: 1rem;
+        padding: 1rem 1rem; 
+        border-width: 0rem;
+    }
+    input{
+        opacity: 0.9;
+        border-radius: 1rem;
+        padding: 1rem 1rem; 
+        border-width: 0rem;
+    }
+}
+.checkbox{
+    @include m.grid(2,4rem);
+}
+.date-time{
+    @include  m.grid(2,5rem);
+}
+.btn{
+    width: 90%;
+    border: none;
+   
+    margin-left: auto;
+    margin-bottom: 2rem;
+}
+//JS
+.visible{
+    visibility: visible;
+}
+.oculto{
+    visibility: hidden;
+    position: fixed;
+}

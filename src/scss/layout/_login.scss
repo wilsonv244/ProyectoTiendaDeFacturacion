@@ -1,0 +1,88 @@
+@use '../base/mixins' as m;
+.fondoLogin{
+    background-image: url('../img/login.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+}
+.fondoRegistro{
+    background: linear-gradient(45deg, rgba(243,226,199,1) 2%,rgba(243,226,199,1) 4%,rgba(154,183,188,1) 23%,rgba(193,158,103,1) 39%,rgba(149,175,144,1) 74%,rgba(243,226,199,1) 92%,rgba(233,212,179,1) 100%);
+    height: 100vh;
+}
+.form{
+    position: relative;
+    margin: 0 auto;
+    max-width: 50rem;
+    margin-top: 20%;
+    .datos{
+        position: relative;
+        padding: 5rem;
+        h2{
+            color: #707070;
+        }
+    }
+    .bglila{
+        opacity: 0.8;
+        position: absolute;
+        background-color: #f1f0d6;
+        height: 100%;
+        width: 100%;
+        border-radius: 6%;
+    }
+}
+.login{
+    // width: 80%;
+    display: flex;
+    flex-direction: column;
+    input{
+        color: #707070;
+        margin-bottom: 2.5rem;
+        border: none;
+        background-color: #ffffff;
+        padding: 1.5rem;
+        border-radius: 10rem;
+    }
+}
+button{
+    text-align: center;
+    @include m.tablet{
+        margin: 0;
+    }
+    margin: 0.4rem 0 0.4rem;
+    padding: 1rem;
+    background-color: #f1f0d6;
+    border: none;
+    color: #707070;
+    font-weight: 600;
+    // border: none;
+    border-radius: 6rem;
+    cursor: pointer;
+    &:hover{
+        background-color: darken($color: #bebea8, $amount: 5);
+        color:  white;
+    }
+}
+.olvidarUsuario{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    a{
+        margin-top: 2.3rem;
+        padding: 1rem;
+        color: white;
+        background-color: rgba(255, 0, 0, 0.6);;
+        
+        border-radius: 5rem;
+    }
+    p{
+        color: #707070;
+        span{
+            cursor: pointer;
+            font-weight: 600;
+        }
+    }
+}
+//confirmar Cuenta
+.confirmado{
+    margin-top: 20%;
+}

@@ -1,0 +1,84 @@
+@use '../base/mixins' as m;
+.main-CrearBoleta{
+    max-width: 50%;
+    margin: 0 auto;
+}
+.formulario{
+    background-image: url(../../../src/img/contacto.jpg);
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    padding-top: 2rem;
+}
+.i-personal{
+    margin-bottom: 3rem;
+    position: relative;
+    .bg-verde{
+        // position: absolute;
+        @include m.bg(rgb(65, 151, 65));
+        // z-index: 2
+        
+    }
+    .bg-black{
+        @include m.bg(rgb(216, 193, 193));
+        // margin-top: 5rem;
+    }
+    .bg-azul{
+        @include m.bg(rgb(80, 80, 224));
+        // margin-top: 5rem;
+    }
+    .datoC{
+        // @include bg(rgb(3, 44, 3));
+        position: relative;
+        padding: 3rem;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+    a{
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        display: block;
+        width: 30%;
+        margin-top: 1.3rem;
+        background-color: #682d2b;
+        padding: 0.8rem;
+        border-radius: 2rem;
+        border-color: none;
+        text-transform: uppercase;
+        font-size: 2.8rem;
+        text-decoration: none;
+        font-weight: 600;
+        color: white;
+    }
+    input{
+        margin-bottom: 0.2rem;
+        border-radius: 2;
+    }
+}
+.dato{
+    z-index: 2;
+    flex-direction: column;
+    display: flex;
+}
+
+.cliente{
+    display: flex;
+    flex-direction: column;
+    @include m.telefono{
+        display: grid;
+        grid-template-columns: 60% 39%;
+        align-items: flex-end;
+        column-gap: 1.2rem;
+    }
+}
+.datosCliente{
+    @include m.telefono{
+        display: grid;
+        grid-template-columns: 50% 50%;
+        column-gap: 1rem;
+
+    }
+}

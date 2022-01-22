@@ -1,0 +1,16 @@
+{
+    "name": "wilson/quesito_wvc1608",
+    "description": "php8, sass, gulp, mysql",
+    "autoload": {
+        "psr-4": {
+            "Barce\\AppSalonPhpMvcJsSass\\": "src/",
+            "MVC\\" : "./",
+            "Controllers\\" : "./controllers",
+            "Model\\" : "./models",
+            "Class\\" : "./clases"
+        }
+    },
+    "require": {
+        "phpmailer/phpmailer": "^6.5"
+    }
+}
