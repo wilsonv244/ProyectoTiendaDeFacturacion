@@ -69,7 +69,7 @@
     flex-direction: column;
     @include m.telefono{
         display: grid;
-        grid-template-columns: 60% 39%;
+        grid-template-columns: 100%;
         align-items: flex-end;
         column-gap: 1.2rem;
     }

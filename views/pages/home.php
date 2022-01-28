@@ -17,15 +17,14 @@
                     <a>Ver Reporte</a>
                 </div>
                 <div class="itemGrid productos">
-                    <a>Ver Producto</a>
+                    <a href="/productos">Ver Producto</a>
                 </div>
                 <div class="itemGrid cliente">
-                    <a>Ver Clientes</a>
+                    <a href="/cliente">Ver Clientes</a>
                 </div>
             </div>
             
             
         </div>
     </div>
-
 </div>

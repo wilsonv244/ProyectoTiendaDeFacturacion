@@ -20,4 +20,25 @@ class cliente extends ActiveRecord{
         $this->numero = $argc['numero']??'';
         $this->correo = $argc['correo']??'';
     }
+    public function alertas(){
+        if (!$this->ruc) {
+             self::$alertas['error'][]='Tiene que poner un ruc';
+        }
+        if (!$this->nombre) {
+             self::$alertas['error'][]='Tiene que poner un Nombre';
+        }
+        if (!$this->apellido) {
+             self::$alertas['error'][]='Tiene que poner un Apellido';
+        }
+        if (!$this->direccion) {
+             self::$alertas['error'][]='Tiene que poner una Direccion';
+        }
+        if (!$this->numero) {
+             self::$alertas['error'][]='Tiene que poner un Numero';
+        }
+        if (!$this->correo) {
+             self::$alertas['error'][]='Tiene que poner un Correo';
+        }
+        return self::$alertas;
+    }
 }

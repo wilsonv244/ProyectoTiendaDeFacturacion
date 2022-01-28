@@ -1,9 +1,9 @@
 <?php 
-    $nombre = $_SESSION['nombre'];
+    $nombre = $_SESSION['nombre']??null;
 ?>
 <div class="header">
     <div class="logo">
-        <img src="/build/img/pc.webp" alt="png"></img>
+        <a href="/home"><img src="/build/img/pc.webp" alt="png"> </img></a>
         <p><span>Hola <?php echo $nombre; ?></span></p>
     </div>
     <div class="salir">

@@ -4,6 +4,7 @@ const facturas ={
     fecha: '',
     hora: '',
     cant: '',
+    cantidadP: [],
     mercaderia: []
 }
 let stuff=[];
@@ -19,7 +20,7 @@ const registrarBoleta = document.querySelector('#registrarBoleta');
 const registrarCantidad = document.querySelector('#cantidad-producto');
 const listaRecibo = document.querySelector('#lista-recibo');
 
-const allInputs = document.querySelectorAll('#formulario input');
+const allInputs = document.querySelectorAll('.dato input');
 //Innputs producto
 const inputNombreP = document.querySelector('#nombre-producto');
 const inputPrecioP = document.querySelector('#precio-producto');
@@ -31,7 +32,19 @@ document.addEventListener('DOMContentLoaded', function () {
     consultarApiProducto();
     registrarCant();
     seleccionarInputs();
-    registrarBoleta.onclick=getBolet;
+    desabilitarRegistro();
+    desabilitarProduct();
+    //Productos
+    inputNombreP.addEventListener('blur', validarFormularioProd);
+    inputPrecioP.addEventListener('blur', validarFormularioProd);
+    registrarCantidad.addEventListener('blur', validarFormularioProd);
+    //cliente
+    inputCliente.addEventListener('blur', vUsuario);
+    inputNombre.addEventListener('blur', vUsuario);
+    inputDireccion.addEventListener('blur',vUsuario);
+    inputNumero.addEventListener('blur',vUsuario);
+
+
 })
 function seleccionarInputs() {
     allInputs.forEach(e=>function () {
@@ -40,7 +53,9 @@ function seleccionarInputs() {
         })
     })
 }
+
 //Intento v1.2
+
 let i = 0;
 function crearResumenProductos(e) {
     limpiar();
@@ -54,7 +69,6 @@ function crearResumenProductos(e) {
         <th>${dato.nombre}</th>
         <th>${cantProducto}</th>
         <th>${dato.precio_venta}</th>
-        <th>${registrarCantidad.value}</th>
         </tr>`;
         agregarProducto.appendChild(crearTr);
     })    
@@ -86,39 +100,45 @@ function addDatos(e) {
 }
 function registrarCant() {
     registrarCantidad.addEventListener('blur', function (e) {
-        cantProducto = e.target.value;
-        facturas.cant= cantProducto;
+        if (e.target.value==='') {
+            // console.log('No tiene ningun valor');
+            registrarCantidad.style.border="4px red solid";
+        }else{
+            cantProducto = e.target.value;
+            facturas.cantidadP= [...facturas.cantidadP,...cantProducto];
+            registrarBoleta.onclick=getBolet;
+        }
+
     })
 }
 //Resumen de productos
 let datosM=[];
 function añadirProductos(product) {
-    // let {mercaderia}=facturas;
+    let {mercaderia}=facturas;
+    //AgregarValidacionInputs
+
     addProducto.addEventListener('click', function (stop) {
         stop.preventDefault();
         inputNombreP.value= '';
         inputPrecioP.value= '';
-        // console.log(datosM);
-        // console.log(facturas.mercaderia[0].id);
+        registrarCantidad.value= '';
+        desabilitarProduct();
+        facturas.mercaderia = product.map(e=>e.id);
+        console.log(facturas);
         limpiar();
         product.forEach(e=>{
-
             const crearTr = document.createElement('TR');
             crearTr.innerHTML=`
             <tr>
-            <th>${i++}</th>
             <th>${e.nombre}</th>
-            <th>${cantProducto}</th>
             <th>${e.precio_venta}</th>
-            <th>${cantProducto*e.precio_venta}</th>
+            <th>${e.precio_venta}</th>
             </tr>`;
             agregarProducto.appendChild(crearTr);
-
         })
         // crearResumenProductos(datosM);
-
-        console.log('hola');
     },{once : true});
+    // console.log(facturas.mercaderia);
 }
 
 //AñadirCliente
@@ -134,10 +154,12 @@ function generarValoresProducto(productos) {
     inputProducto.addEventListener('blur', function (e) {
         const codigoP = e.target.value;
         const resultado = productos.filter(producto=>producto.codigo === codigoP);  
+        //añadirValores al INput
         addDatosP(resultado);
-        
+
         stuff=[...stuff,...resultado];
-        
+        console.log('CANTIDA DE DATOS'+stuff.length);
+        console.log(stuff);
         añadirProductos(stuff);
     })
 }
@@ -155,18 +177,21 @@ function addDatosP(product) {
 }
 
 async function getBolet() {
-    const {fecha, id, hora, mercaderia,cant} = facturas;
-    const id_producto = mercaderia.map(cosas=>cosas.id);
-    console.log(id_producto);
-    // return;
+    
+    const {fecha, id, hora, mercaderia,cant, cantidadP} = facturas;
+    const id_producto = mercaderia.map(cosas=>cosas);
+    const id_cantidad = cantidadP.map(cant=>cant);
+    console.log(facturas);
+    //return;
     const datoP = new FormData();
     datoP.append('nombre', 'wilson Vargas');
     datoP.append('fecha', fecha);    
     datoP.append('idcliente', id);    
     datoP.append('hora', hora);    
-    datoP.append('cantidadp', cant);    
+    datoP.append('cantidadp', id_cantidad);    
     datoP.append('id_producto', id_producto);
     console.log([...datoP]);
+    // return;
     try {
         const url = 'http://localhost:3000/api/enviarDatos';
         const respuest = await fetch(url, {
@@ -208,4 +233,35 @@ function limpiar() {
     while (agregarProducto.firstChild) {
         agregarProducto.removeChild(agregarProducto.firstChild);
     }
+}
+function validarFormularioProd(e) {
+    const datoI=e.target.value;
+    if (datoI==='') {
+        console.log('falta completar datos del producto')
+    }else{
+        addProducto.disabled=false;
+        addProducto.classList.remove('no-datos');
+    }
+    console.log(e.target.value);
+}
+function vUsuario(e) {
+    const datoU = e.target.value;
+    console.log(datoU);
+    if (datoU==='' && stuff.length>1) {
+        e.target.classList.add('no-producto')
+    }else{
+        registrarBoleta.disabled=false;
+        registrarBoleta.classList.remove('no-datos');
+    }
+}
+//desabilitarRegistro Boton Input
+function desabilitarRegistro() {
+    console.log(stuff.length);
+    registrarBoleta.disabled=true;
+    registrarBoleta.classList.add('no-datos');
+}
+//Desabilitar Boton Input
+function desabilitarProduct() {
+    addProducto.disabled=true;
+    addProducto.classList.add('no-datos');
 }
